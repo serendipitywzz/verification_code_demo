@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串验证码(string_captcha)</title>
+    <style type="text/css">
+        .code_a {
+            color: #0000ff;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #imgCode {
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        function changeCode01() {
+            var imageCode = document.getElementById("imgCode");
+            imageCode.src = "createstrcapatch?" + Math.random();
+        }
+    </script>
+</head>
+<body>
+
+<hr/>
+<h3>后端生成字符串验证码</h3>
+<form action="form01" method="post">
+    <label>验证码：</label>
+    <input type="text" id="inCode" name="inCode"/>
+    <img src="createstrcapatch" align="center" id="imgCode" onclick="changeCode01()"/>
+    <a class="code_a" onclick="changeCode01()">换一张</a><br/>
+    <input type="submit" value="登录">
+</form>
+<div style="color: red">
+    <p th:text="${err}"></p>
+</div>
+
+<hr/>
+<script type="text/javascript" src="/js/strcaptcha.js"></script>
+<h3>前端生成字符串验证码</h3>
+<form action="index" method="post">
+    <label>验证码：</label>
+    <input type="text" id="inCode02" name="inCode02"/>
+    <canvas id="cvs" onclick="changeCode02()"></canvas>
+    <!--<img src="stringverificationcode" align="center" id="imgCode" onclick="changeCode()"/>-->
+    <a class="code_a" onclick="changeCode02()">换一张</a><br/>
+    <input type="submit" value="登录" onclick="return valiCodeFunc(inCode02);">
+</form>
+<div style="color: red">
+    <span id="err"/>
+</div>
+
+
+
+<hr/>
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="/css/htmleaf-demo.css">
+<link rel="stylesheet" type="text/css" href="/css/verify.css">
+<link rel="stylesheet" type="text/css" href="/css/public.css">
+
+
+<h3>jquery验证码插件verify.js</h3>
+
+<div id="mpanel2" ></div>
+<button type="button" id="check-btn" class="btn-sm">确定</button>
+
+
+<script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery-1.11.0.min.js"><\/script>')</script>
+<script type="text/javascript" src="/js/verify.js" ></script>
+<script type="text/javascript">
+    $('#mpanel2').codeVerify({
+        type : 1,
+        width : '180px',
+        height : '35px',
+        fontSize : '25px',
+        codeLength : 4,
+        btnId : 'check-btn',
+        ready : function() {
+        },
+        success : function() {
+            alert('验证匹配！');
+        },
+        error : function() {
+            alert('验证码不匹配！');
+        }
+    });
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>滑块验证码-简单模式</title>
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="/css/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="/css/verify.css">
+    <link rel="stylesheet" type="text/css" href="/css/public.css">
+
+</head>
+<body>
+    <form action="#" method="post">
+        <div>
+            <label>验证： </label>
+            <div id="mpanel1">
+
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="登录" id="btnOK" disabled="disabled"/>
+        </div>
+    </form>
+
+
+
+<script type="text/javascript" th:src="@{http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js}"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+<script type="text/javascript" src="/js/verify.js" ></script>
+
+
+<script>
+    $('#mpanel1').slideVerify({
+        type : 1,		//类型
+        vOffset : 5,	//误差量，根据需求自行调整
+        barSize : {
+            width : '30%',
+            height : '40px',
+        },
+        ready : function() {
+        },
+        success : function() {
+            //alert('验证成功，添加你自己的代码！');
+            $("#btnOK").prop("disabled", "");
+            $("#btnOK").css("background-color", "#008cba");
+
+            //......后续操作
+        },
+        error : function() {
+            //		        	alert('验证失败！');
+        }
+
+    });
+</script>
+</body>
+</html>
